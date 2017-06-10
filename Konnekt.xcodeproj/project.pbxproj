@@ -8,23 +8,40 @@
 
 /* Begin PBXBuildFile section */
 		E2056AFC1EE9D13E00103075 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2056AFB1EE9D13E00103075 /* GameState.swift */; };
-		E2056B001EE9D3CA00103075 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2056AFF1EE9D3CA00103075 /* MenuButton.swift */; };
-		E2056B041EE9E8C900103075 /* GameAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2056B031EE9E8C900103075 /* GameAssets.xcassets */; };
-		E2056B081EE9E8F700103075 /* MenuAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2056B071EE9E8F700103075 /* MenuAssets.xcassets */; };
-		E2056B0C1EE9EA1000103075 /* AppAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2056B0B1EE9EA1000103075 /* AppAssets.xcassets */; };
+		E23F5E551EEB301B00DFC7BC /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F5E541EEB301B00DFC7BC /* MenuButton.swift */; };
 		E2D67A831EE897F0005B58D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D67A821EE897F0005B58D0 /* AppDelegate.swift */; };
 		E2D67A891EE897F0005B58D0 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D67A881EE897F0005B58D0 /* MenuScene.swift */; };
 		E2D67A8B1EE897F0005B58D0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D67A8A1EE897F0005B58D0 /* GameViewController.swift */; };
 		E2D67A8E1EE897F0005B58D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2D67A8C1EE897F0005B58D0 /* Main.storyboard */; };
 		E2D67A931EE897F0005B58D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2D67A911EE897F0005B58D0 /* LaunchScreen.storyboard */; };
+		E2FECFDD1EEC2D8500311358 /* Quicksand-Bold.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2FECFD41EEC2D2800311358 /* Quicksand-Bold.ttf */; };
+		E2FECFDE1EEC2D8500311358 /* Quicksand-Light.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2FECFD51EEC2D2800311358 /* Quicksand-Light.ttf */; };
+		E2FECFDF1EEC2D8500311358 /* Quicksand-Medium.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2FECFD61EEC2D2800311358 /* Quicksand-Medium.ttf */; };
+		E2FECFE01EEC2D8500311358 /* Quicksand-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = E2FECFD71EEC2D2800311358 /* Quicksand-Regular.ttf */; };
+		E2FECFE51EEC31A200311358 /* AppAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FECFE21EEC31A200311358 /* AppAssets.xcassets */; };
+		E2FECFE61EEC31A200311358 /* GameAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FECFE31EEC31A200311358 /* GameAssets.xcassets */; };
+		E2FECFE71EEC31A200311358 /* MenuAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2FECFE41EEC31A200311358 /* MenuAssets.xcassets */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E2FECFDC1EEC2D6C00311358 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Fonts;
+			dstSubfolderSpec = 7;
+			files = (
+				E2FECFDD1EEC2D8500311358 /* Quicksand-Bold.ttf in CopyFiles */,
+				E2FECFDE1EEC2D8500311358 /* Quicksand-Light.ttf in CopyFiles */,
+				E2FECFDF1EEC2D8500311358 /* Quicksand-Medium.ttf in CopyFiles */,
+				E2FECFE01EEC2D8500311358 /* Quicksand-Regular.ttf in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		E2056AFB1EE9D13E00103075 /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
-		E2056AFF1EE9D3CA00103075 /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuButton.swift; path = ../MenuButton.swift; sourceTree = "<group>"; };
-		E2056B031EE9E8C900103075 /* GameAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = GameAssets.xcassets; path = ../GameAssets.xcassets; sourceTree = "<group>"; };
-		E2056B071EE9E8F700103075 /* MenuAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = MenuAssets.xcassets; path = ../MenuAssets.xcassets; sourceTree = "<group>"; };
-		E2056B0B1EE9EA1000103075 /* AppAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = AppAssets.xcassets; path = ../AppAssets.xcassets; sourceTree = "<group>"; };
+		E23F5E541EEB301B00DFC7BC /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		E2D67A7F1EE897F0005B58D0 /* Konnekt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Konnekt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2D67A821EE897F0005B58D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2D67A881EE897F0005B58D0 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
@@ -32,6 +49,13 @@
 		E2D67A8D1EE897F0005B58D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E2D67A921EE897F0005B58D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2D67A941EE897F0005B58D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2FECFD41EEC2D2800311358 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.ttf"; sourceTree = "<group>"; };
+		E2FECFD51EEC2D2800311358 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Light.ttf"; sourceTree = "<group>"; };
+		E2FECFD61EEC2D2800311358 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
+		E2FECFD71EEC2D2800311358 /* Quicksand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Regular.ttf"; sourceTree = "<group>"; };
+		E2FECFE21EEC31A200311358 /* AppAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppAssets.xcassets; sourceTree = "<group>"; };
+		E2FECFE31EEC31A200311358 /* GameAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = GameAssets.xcassets; sourceTree = "<group>"; };
+		E2FECFE41EEC31A200311358 /* MenuAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = MenuAssets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,9 +72,10 @@
 		E23F5E501EEB2EF700DFC7BC /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				E2056B0B1EE9EA1000103075 /* AppAssets.xcassets */,
-				E2056B031EE9E8C900103075 /* GameAssets.xcassets */,
-				E2056B071EE9E8F700103075 /* MenuAssets.xcassets */,
+				E2FECFE21EEC31A200311358 /* AppAssets.xcassets */,
+				E2FECFE31EEC31A200311358 /* GameAssets.xcassets */,
+				E2FECFE41EEC31A200311358 /* MenuAssets.xcassets */,
+				E2FECFE11EEC305D00311358 /* Fonts */,
 			);
 			name = Assets;
 			sourceTree = "<group>";
@@ -58,7 +83,7 @@
 		E23F5E511EEB2F0000DFC7BC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				E2056AFF1EE9D3CA00103075 /* MenuButton.swift */,
+				E23F5E541EEB301B00DFC7BC /* MenuButton.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -103,6 +128,17 @@
 			path = Konnekt;
 			sourceTree = "<group>";
 		};
+		E2FECFE11EEC305D00311358 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E2FECFD41EEC2D2800311358 /* Quicksand-Bold.ttf */,
+				E2FECFD51EEC2D2800311358 /* Quicksand-Light.ttf */,
+				E2FECFD61EEC2D2800311358 /* Quicksand-Medium.ttf */,
+				E2FECFD71EEC2D2800311358 /* Quicksand-Regular.ttf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,6 +149,7 @@
 				E2D67A7B1EE897F0005B58D0 /* Sources */,
 				E2D67A7C1EE897F0005B58D0 /* Frameworks */,
 				E2D67A7D1EE897F0005B58D0 /* Resources */,
+				E2FECFDC1EEC2D6C00311358 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -163,11 +200,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2056B041EE9E8C900103075 /* GameAssets.xcassets in Resources */,
-				E2056B0C1EE9EA1000103075 /* AppAssets.xcassets in Resources */,
+				E2FECFE61EEC31A200311358 /* GameAssets.xcassets in Resources */,
+				E2FECFE51EEC31A200311358 /* AppAssets.xcassets in Resources */,
 				E2D67A8E1EE897F0005B58D0 /* Main.storyboard in Resources */,
+				E2FECFE71EEC31A200311358 /* MenuAssets.xcassets in Resources */,
 				E2D67A931EE897F0005B58D0 /* LaunchScreen.storyboard in Resources */,
-				E2056B081EE9E8F700103075 /* MenuAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +217,7 @@
 			files = (
 				E2D67A891EE897F0005B58D0 /* MenuScene.swift in Sources */,
 				E2056AFC1EE9D13E00103075 /* GameState.swift in Sources */,
-				E2056B001EE9D3CA00103075 /* MenuButton.swift in Sources */,
+				E23F5E551EEB301B00DFC7BC /* MenuButton.swift in Sources */,
 				E2D67A8B1EE897F0005B58D0 /* GameViewController.swift in Sources */,
 				E2D67A831EE897F0005B58D0 /* AppDelegate.swift in Sources */,
 			);
@@ -306,7 +343,6 @@
 		E2D67A981EE897F0005B58D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = T8Q4J6BT54;
 				INFOPLIST_FILE = Konnekt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -319,7 +355,6 @@
 		E2D67A991EE897F0005B58D0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = T8Q4J6BT54;
 				INFOPLIST_FILE = Konnekt/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
