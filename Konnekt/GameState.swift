@@ -14,5 +14,8 @@ import Foundation
 class GameState{
     static let sharedInstance = GameState()
     
-    var paused = false
+    var isPaused = false
+    var isGameInProgress = false
+    var currentScore: GameScore?
+    
 }
