@@ -43,7 +43,12 @@ class MenuScene: SKScene {
         let playLabel = SKLabelNode(fontNamed: "Quicksand Bold")
         playLabel.fontSize = 36
         playLabel.fontColor = textColor
-        playLabel.text = "Play"
+        if gameState.isGameInProgress {
+            playLabel.text = "Resume"
+        }
+        else{
+            playLabel.text = "Play"
+        }
         
         playLabel.verticalAlignmentMode = .baseline
         playLabel.horizontalAlignmentMode = .right
@@ -76,7 +81,7 @@ class MenuScene: SKScene {
         
         swipeLabel.verticalAlignmentMode = .baseline
         swipeLabel.horizontalAlignmentMode = .center
-        swipeLabel.position = CGPoint(x: self.size.width / 2.0, y: 402)
+        swipeLabel.position = CGPoint(x: self.size.width / 2.0, y: 390)
         
         self.addChild(swipeLabel)
         
@@ -163,20 +168,20 @@ class MenuScene: SKScene {
         
         //paused label
         let pausedLabel = SKLabelNode(fontNamed: "Quicksand Bold")
-        pausedLabel.fontSize = 36
+        pausedLabel.fontSize = 42
         pausedLabel.fontColor = textColor
-        pausedLabel.text = "Paused"
+        pausedLabel.text = "(Paused)"
         
         pausedLabel.verticalAlignmentMode = .baseline
         pausedLabel.horizontalAlignmentMode = .center
         pausedLabel.position = CGPoint(x: self.size.width / 2.0,
-                                       y: 552)
+                                       y: 580)
         
         parentNode.addChild(pausedLabel)
         
         //score label
         let scoreLabel = SKLabelNode(fontNamed: "Quicksand Bold")
-        scoreLabel.fontSize = 100
+        scoreLabel.fontSize = 90
         scoreLabel.fontColor = UIColor.init(red: 91.0 / 255.0,
                                             green: 100.0 / 255.0,
                                             blue: 107.0 / 255.0,
@@ -186,7 +191,7 @@ class MenuScene: SKScene {
         scoreLabel.verticalAlignmentMode = .baseline
         scoreLabel.horizontalAlignmentMode = .center
         scoreLabel.position = CGPoint(x: self.size.width / 2.0,
-                                       y: 604)
+                                       y: 641)
         
         parentNode.addChild(scoreLabel)
         

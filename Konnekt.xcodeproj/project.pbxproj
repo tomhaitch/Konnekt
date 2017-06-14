@@ -11,6 +11,10 @@
 		E23F5E551EEB301B00DFC7BC /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F5E541EEB301B00DFC7BC /* MenuButton.swift */; };
 		E24AA9141EEC4B4100269FD4 /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24AA9131EEC4B4100269FD4 /* SwipeView.swift */; };
 		E24AA9161EEC4F6500269FD4 /* GameScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24AA9151EEC4F6500269FD4 /* GameScore.swift */; };
+		E28F1C1B1EF0596E0046DB2C /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F1C1A1EF0596E0046DB2C /* GameBoard.swift */; };
+		E28F1C1D1EF060770046DB2C /* GamePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F1C1C1EF060770046DB2C /* GamePiece.swift */; };
+		E28F1C1F1EF065460046DB2C /* PlayablePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F1C1E1EF065460046DB2C /* PlayablePiece.swift */; };
+		E28F1C231EF06E210046DB2C /* CGPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28F1C221EF06E210046DB2C /* CGPoint+Extensions.swift */; };
 		E2BB7CFB1EEDAE4B004B7E0B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB7CFA1EEDAE4B004B7E0B /* GameScene.swift */; };
 		E2BB7CFD1EEDB17D004B7E0B /* PieceHold.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB7CFC1EEDB17D004B7E0B /* PieceHold.swift */; };
 		E2BB7CFF1EEDC0AA004B7E0B /* PieceRotationIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2BB7CFE1EEDC0AA004B7E0B /* PieceRotationIndicator.swift */; };
@@ -49,6 +53,10 @@
 		E23F5E541EEB301B00DFC7BC /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
 		E24AA9131EEC4B4100269FD4 /* SwipeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
 		E24AA9151EEC4F6500269FD4 /* GameScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameScore.swift; sourceTree = "<group>"; };
+		E28F1C1A1EF0596E0046DB2C /* GameBoard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
+		E28F1C1C1EF060770046DB2C /* GamePiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamePiece.swift; sourceTree = "<group>"; };
+		E28F1C1E1EF065460046DB2C /* PlayablePiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayablePiece.swift; sourceTree = "<group>"; };
+		E28F1C221EF06E210046DB2C /* CGPoint+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+Extensions.swift"; sourceTree = "<group>"; };
 		E2BB7CFA1EEDAE4B004B7E0B /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = ../GameScene.swift; sourceTree = "<group>"; };
 		E2BB7CFC1EEDB17D004B7E0B /* PieceHold.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieceHold.swift; sourceTree = "<group>"; };
 		E2BB7CFE1EEDC0AA004B7E0B /* PieceRotationIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieceRotationIndicator.swift; sourceTree = "<group>"; };
@@ -95,6 +103,7 @@
 			children = (
 				E23F5E541EEB301B00DFC7BC /* MenuButton.swift */,
 				E24AA9131EEC4B4100269FD4 /* SwipeView.swift */,
+				E28F1C221EF06E210046DB2C /* CGPoint+Extensions.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -136,6 +145,9 @@
 				E2056AFB1EE9D13E00103075 /* GameState.swift */,
 				E2D67A881EE897F0005B58D0 /* MenuScene.swift */,
 				E2BB7CFA1EEDAE4B004B7E0B /* GameScene.swift */,
+				E28F1C1A1EF0596E0046DB2C /* GameBoard.swift */,
+				E28F1C1C1EF060770046DB2C /* GamePiece.swift */,
+				E28F1C1E1EF065460046DB2C /* PlayablePiece.swift */,
 				E2BB7CFE1EEDC0AA004B7E0B /* PieceRotationIndicator.swift */,
 				E2BB7CFC1EEDB17D004B7E0B /* PieceHold.swift */,
 				E24AA9151EEC4F6500269FD4 /* GameScore.swift */,
@@ -236,10 +248,14 @@
 				E23F5E551EEB301B00DFC7BC /* MenuButton.swift in Sources */,
 				E2D67A8B1EE897F0005B58D0 /* GameViewController.swift in Sources */,
 				E2D67A831EE897F0005B58D0 /* AppDelegate.swift in Sources */,
+				E28F1C231EF06E210046DB2C /* CGPoint+Extensions.swift in Sources */,
+				E28F1C1F1EF065460046DB2C /* PlayablePiece.swift in Sources */,
+				E28F1C1D1EF060770046DB2C /* GamePiece.swift in Sources */,
 				E2BB7CFF1EEDC0AA004B7E0B /* PieceRotationIndicator.swift in Sources */,
 				E2BB7CFD1EEDB17D004B7E0B /* PieceHold.swift in Sources */,
 				E24AA9161EEC4F6500269FD4 /* GameScore.swift in Sources */,
 				E24AA9141EEC4B4100269FD4 /* SwipeView.swift in Sources */,
+				E28F1C1B1EF0596E0046DB2C /* GameBoard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
