@@ -10,12 +10,16 @@
 // Singleton
 
 import Foundation
+import UIKit
 
 class GameState{
     static let sharedInstance = GameState()
     
     var isPaused = false
     var isGameInProgress = false
-    var currentScore: GameScore?
+    var currentScore: GameScore = GameScore(score: 0)
+    var currentGameBoardPieces: [OnBoardGamePiece] = []
     
 }
+
+

@@ -25,6 +25,8 @@ class MenuScene: SKScene {
     
     private let gameState = GameState.sharedInstance
     
+    private var previousGameImages: [UIImage] = []      // array of previous game images
+    
     override func didMove(to view: SKView) {
         
         self.setupScene()
@@ -96,12 +98,8 @@ class MenuScene: SKScene {
         
         
         var gms: GameScore
-        if gameState.isGameInProgress{
-            gms = gameState.currentScore!
-        }
-        else {
-            gms = GameScore(score: 12345)
-        }
+        gms = gameState.currentScore
+        
         swipeView.addView(contentNode: createPreviousScoreCard(fromGameScore: gms))
         swipeView.addView(contentNode: createPreviousScoreCard(fromGameScore: gms))
         swipeView.addView(contentNode: createPreviousScoreCard(fromGameScore: gms))
@@ -127,7 +125,13 @@ class MenuScene: SKScene {
             backLabel.position = CGPoint(x: 123, y: 1189)
             
             self.addChild(backLabel)
+            
         }
+    }
+    
+    // called by game scene when new image of gameboard has been created
+    func gameBoardImageCreated(image: UIImage) {
+        
     }
     
     
@@ -177,7 +181,9 @@ class MenuScene: SKScene {
         pausedLabel.position = CGPoint(x: self.size.width / 2.0,
                                        y: 580)
         
-        parentNode.addChild(pausedLabel)
+        if self.gameState.isPaused {            // only add paused label for a paused game
+            parentNode.addChild(pausedLabel)
+        }
         
         //score label
         let scoreLabel = SKLabelNode(fontNamed: "Quicksand Bold")

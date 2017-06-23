@@ -26,18 +26,28 @@ class GameScene: SKScene {
     private let gameState = GameState.sharedInstance        // game state singleton reference
     private var gameScore: GameScore!                       // score for current game 
     private let holdArea: PieceHold = PieceHold()           // peice hold area
-    private let rotationIndicator =
+    internal let rotationIndicator =
                                 PieceRotationIndicator()    // indicator for piece rotation
-    private let gameBoard = GameBoard()                     // game board play area
-    private let scoreIndicator =
+    private var gameBoard: GameBoard!                      // game board play area
+    internal let scoreIndicator =
                 SKLabelNode(fontNamed: "Quicksand Bold")    // label to indicate
                                                                           // current score
     
     private var inPlayGamePiece: PlayablePiece?             // the game piece current in play
                                                             // (moveable)
+    private var touchBeganLocation: CGPoint? = .zero         // where the touch began, used to check if
+                                                            // dragging or rotating
     private var isCurrentlyDraggingPiece = false            // flag for moving piece when touched
     private var touchOffsetFromCenter: CGPoint = .zero      // the offset between the touch and
                                                             // the center of the piece, for dragging accuracy
+    
+    internal var currentPieceTypeIsDual: Bool = false      // what type of piece is currently in play
+    
+    private var gameOverModal: SKSpriteNode!                // the modal to display for game over, initally 
+                                                            // offscreen
+    private var gameOverScoreLabel: SKLabelNode!             // the final score label node
+    
+    private var isGameOver = false                          // is the game over, used for touch detection
     
     override func didMove(to view: SKView) {
         self.isUserInteractionEnabled = true    //enable touch, not multitouch
@@ -63,6 +73,7 @@ class GameScene: SKScene {
         // create the gameboard, the gameboard is responsible
         // for choosing which pieces to generate next, so
         // needs to be created first
+        gameBoard = GameBoard(sceneDelegate: self)
         gameBoard.position = CGPoint(x: 57, y: 385)
         self.addChild(gameBoard)
         
@@ -71,11 +82,16 @@ class GameScene: SKScene {
         // from game state if not create a new one
         if gameState.isGameInProgress {
             self.gameScore = gameState.currentScore
+            self.gameScore.scoreDelegate = self             // set the score delegate to self
         }
         else {
-            self.gameScore = GameScore(score: 0)
+            self.gameScore = GameScore(score: 0, delegate: self)
             gameState.currentScore = self.gameScore // create and set new score object
         }
+        
+        // pass the score object to the game board
+        self.gameBoard.gameScore = self.gameScore
+        self.gameBoard.gameState = self.gameState
         
         // score label
         let scoreLabel = SKLabelNode(fontNamed: "Quicksand Bold")
@@ -103,7 +119,9 @@ class GameScene: SKScene {
         
         
         // Menu Button
-        let menuButton = MenuButton(defaultTextureName: "Btn_Menu.png", pressedTextureName: "Btn_Menu_Down.png", touchMethod: menuButtonPressed)
+        let menuButton = MenuButton(defaultTextureName: "Btn_Menu.png",
+                                    pressedTextureName: "Btn_Menu_Down.png",
+                                    touchMethod: menuButtonPressed)
         menuButton.position = CGPoint(x: 91, y: 1236)
         self.addChild(menuButton)
         
@@ -118,6 +136,47 @@ class GameScene: SKScene {
         menuLabel.position = CGPoint(x: 123, y: 1189)
         
         self.addChild(menuLabel)
+        
+        // create the game over modal
+        self.createGameOverModal()
+        
+    }
+    
+    func createGameOverModal(){
+        
+        
+        //create the modal background
+        self.gameOverModal = SKSpriteNode(imageNamed: "Modal_Game_Over.png")
+        self.gameOverModal.position = CGPoint(x: self.scene!.size.width / 2.0,
+                                              y: -1000)
+        
+        // create the final score
+        self.gameOverScoreLabel = SKLabelNode(fontNamed: "Quicksand Bold")
+        self.gameOverScoreLabel.fontColor = UIColor.init(red: 91.0 / 255.0,
+                                                green: 100.0 / 255.0,
+                                                blue: 107.0 / 255.0,
+                                                alpha: 1.0)
+        self.gameOverScoreLabel.fontSize = 100
+        self.gameOverScoreLabel.text = String(self.gameScore.score)
+        
+        self.gameOverScoreLabel.verticalAlignmentMode = .baseline
+        self.gameOverScoreLabel.horizontalAlignmentMode = .center
+        self.gameOverScoreLabel.position = CGPoint(x: 0, y: 0)
+        
+        gameOverModal.addChild(self.gameOverScoreLabel)
+        
+        // create the menu button
+        let gameOverMenuButton = MenuButton(defaultTextureName: "Btn_Game_Over_Menu.png",
+                                            pressedTextureName: "Btn_Game_Over_Menu.png",
+                                            touchMethod: gameOverMenuButtonPressed)
+        gameOverMenuButton.anchorPoint = CGPoint(x: 0.5, y: 0)
+        gameOverMenuButton.position = CGPoint(x: 0, y: -275)
+        
+        gameOverModal.addChild(gameOverMenuButton)
+        
+        gameOverModal.zPosition = 2
+        
+        self.addChild(self.gameOverModal)
     }
     
     func beginGame(){
@@ -125,17 +184,70 @@ class GameScene: SKScene {
         gameState.isGameInProgress = true   // set game in progress flag
         
         // spawn the first piece
-        let piece = PlayablePiece(withLeftPieceType: .One, andRightPieceType: .Three)
-        self.movePlayablePieceToSpawnLocation(piece: piece)
+        self.createNewPlayablePiece()
+    }
+    
+    // spawn a new playable piece, call game board to ask what piece
+    // to create
+    private func createNewPlayablePiece() {
         
+        // what to spawn
+        let piece = self.gameBoard.nextPieceToSpawn()
+        
+        // check if there is space for this piece
+        var isDual = true
+        if piece.Piece2 == nil {
+            isDual = false
+        }
+        if self.gameBoard.isSpaceAvailable(isDualPiece: isDual) == false {
+            
+            // no space game over
+            self.gameState.isGameInProgress = false
+            self.isGameOver = true
+            
+            self.gameOverScoreLabel.text = String(self.gameScore.score)
+            
+            let action = SKAction.move(to: CGPoint(x: 375, y: 667),
+                                       duration: 1.25)
+            let fade = SKAction.colorize(with: UIColor.gray, colorBlendFactor: 1.0, duration: 1.0)
+            
+            let fadeSprite = SKSpriteNode(texture: nil, color: UIColor.clear, size: self.scene!.size)
+            fadeSprite.position = CGPoint(x: self.scene!.size.width / 2.0,
+                                          y: self.scene!.size.height / 2.0)
+            
+            fadeSprite.zPosition = 1
+            self.addChild(fadeSprite)
+            
+            self.gameOverModal.run(action)
+            fadeSprite.run(fade)
+            
+            return
+        }
+        
+        // set the inPlayPiece to the newest piece
         self.inPlayGamePiece = piece
-        
         self.addChild(piece)
+        
+        // move to spawn location
+        self.movePlayablePieceToSpawnLocation(piece: piece)
     }
     
     // set the playable piece location to the spawn position
     private func movePlayablePieceToSpawnLocation(piece: PlayablePiece){
         piece.position = self.gamePieceSpawnLocation
+    }
+    
+    // called to present the menu scene and pass created uiimage of
+    // the gameboard
+    private func menuScenePresent(){
+        
+        //create scene, initialise it and present it
+        let menuScene = MenuScene.init(size: self.size)
+        menuScene.scaleMode = .aspectFill
+        
+        menuScene.gameBoardImageCreated(image: self.gameBoard.createGameBoardUIImage())
+        
+        self.scene?.view?.presentScene(menuScene)
     }
     
     // button press handlers
@@ -144,36 +256,56 @@ class GameScene: SKScene {
         //pause the current game
         gameState.isPaused = true
         
-        //create scene, initialise it and present it
-        let menuScene = MenuScene.init(size: self.size)
-        menuScene.scaleMode = .aspectFill
+        //save the current gameboard
+        //self.gameBoard.saveGameBoard()
         
-        self.scene?.view?.presentScene(menuScene)
+        // present the menu scene
+        self.menuScenePresent()
+    }
+    
+    func gameOverMenuButtonPressed(){
+        
+        // set the gamestate flags
+        gameState.isPaused = false
+        gameState.isGameInProgress = false
+        
+        // present the menu scene
+        self.menuScenePresent()
     }
     
     //touch handling, no multitouch so only ever one touch
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        //check if touch is within pieces
-        let location = touches.first!.location(in: self)     // get touch location
+        // is game over?
+        if self.isGameOver == false {
         
-        if inPlayGamePiece!.contains(location){     // check if touched the pieces
+            // store the touch location to check if rotate or drag in
+            // touches ended method
+            self.touchBeganLocation = touches.first!.location(in: self)
+        
+            // check if touch is within pieces
+            if inPlayGamePiece!.contains(self.touchBeganLocation!){     // check if touched the pieces
                 
-            self.isCurrentlyDraggingPiece = true    // set piece dragging flag
-            self.touchOffsetFromCenter = location - self.inPlayGamePiece!.position
-            print(touchOffsetFromCenter)
+                self.isCurrentlyDraggingPiece = true    // set piece dragging flag
+                self.touchOffsetFromCenter = self.touchBeganLocation!
+                                         - self.inPlayGamePiece!.position
+            }
         }
         
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        //if currently moving piece flag set, move the in play piece
-        if isCurrentlyDraggingPiece{
-            let location = touches.first!.location(in: self)    // get touch location
+        // is game over?
+        if self.isGameOver == false {
+        
+            //if currently moving piece flag set, move the in play piece
+            if isCurrentlyDraggingPiece{
+                let location = touches.first!.location(in: self)    // get touch location
             
-            //set inplay piece position accordingly
-            inPlayGamePiece?.position = location - touchOffsetFromCenter
+                //set inplay piece position accordingly
+                inPlayGamePiece?.position = location - touchOffsetFromCenter
+            }
         }
     }
     
@@ -183,15 +315,75 @@ class GameScene: SKScene {
     
         let location = touches.first!.location(in: self)    // get touch location
         
-        if self.gameBoard.contains(location){       // check if fallen within the gameboard
+        // is game over?
+        if self.isGameOver == false {
+        
+            // only rotate if its a dual piece
+            if self.currentPieceTypeIsDual {
+                if self.touchBeganLocation!.isWithinTolerance(of: location,  // check if touches are within tolerance
+                                                    xTolerance: 10, yTolerance: 10) {   // for rotating not dragging
+                    // rotate piece
+                    self.inPlayGamePiece?.rotatePiece()
             
-        }
-        else {                                      // outside gameboard, reset position
-            self.movePlayablePieceToSpawnLocation(piece: self.inPlayGamePiece!)
+                }
+            }
+        
+            if self.gameBoard.contains(inPlayGamePiece!.position){       // check if fallen within the gameboard
+            
+                if self.gameBoard.pieceDropped(piece: inPlayGamePiece!) { // call board to calculate where dropped
+                                                                       // and if not accepted by board reset position
+                
+                    // remove the current inPlayGamePiece as its been added to the board
+                    self.inPlayGamePiece!.removeFromParent()
+                    self.inPlayGamePiece = nil
+                
+                    // piece accepted create next piece
+                    self.createNewPlayablePiece()
+                }
+                else {                                  // reset position
+                    self.movePlayablePieceToSpawnLocation(piece: self.inPlayGamePiece!)
+                }
+            }
+            else {                                      // outside gameboard, reset position
+                self.movePlayablePieceToSpawnLocation(piece: self.inPlayGamePiece!)
+            }
+        
+            self.isCurrentlyDraggingPiece = false   // reset the flag
+        
         }
         
-        self.isCurrentlyDraggingPiece = false   // reset the flag
-        
+        else{                   // only allow touching of the modal
+            
+            }
     }
     
+}
+
+
+// protocol delegate to change the score labels
+extension GameScene: GameScoreDidChange {
+
+    // change the score label
+    func scroeDidChange(newScore: Int) {
+        self.scoreIndicator.text = String(newScore)
+    }
+}
+
+// protocol delegate from the game board
+extension GameScene: GameBoardSceneProtocol {
+    
+    // what type of piece has just been spawned
+    func nextGamePieceGenerated(isDual: Bool) {
+        
+        // set the flag
+        self.currentPieceTypeIsDual = isDual
+        
+        // hide the rotation indicator if a single piece
+        if isDual {
+            self.rotationIndicator.isHidden = false
+        }
+        else {
+            self.rotationIndicator.isHidden = true
+        }
+    }
 }
