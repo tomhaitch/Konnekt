@@ -123,8 +123,7 @@ class GameBoard: SKNode{
         
         let tex = self.scene?.view?.texture(from: self)
         let img = UIImage(cgImage: (tex?.cgImage())!)
-        
-        self.gameState.image = img
+
     }
     
     // called to create a UIImage from the gameboard
