@@ -265,6 +265,9 @@ class GameScene: SKScene {
     
     func gameOverMenuButtonPressed(){
         
+        // set the user defaults flag indicating a game has been completed
+        UserDefaults.standard.set(true, forKey: "Konnekt_First_Game_Completed")
+        
         // set the gamestate flags
         gameState.isPaused = false
         gameState.isGameInProgress = false

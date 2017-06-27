@@ -23,9 +23,11 @@ class MenuScene: SKScene {
                                      blue: 222.0 / 255.0,
                                      alpha: 1.0)
     
-    private let gameState = GameState.sharedInstance
+    private let gameState = GameState.sharedInstance    // game state singleton
     
     private var previousGameImages: [UIImage] = []      // array of previous game images
+    
+    private let previousGamesModel = PreviousGamesModel()
     
     override func didMove(to view: SKView) {
         
@@ -37,7 +39,8 @@ class MenuScene: SKScene {
         self.backgroundColor = .white
         
         //play resume button
-        let playBtn = MenuButton(defaultTextureName: "Btn_Play.png", pressedTextureName: "Btn_Play_Down.png", touchMethod: playButtonPressed)
+        let playBtn = MenuButton(defaultTextureName: "Btn_Play.png",
+                                 pressedTextureName: "Btn_Play_Down.png", touchMethod: playButtonPressed)
         playBtn.position = CGPoint(x: 256, y: 216)
         self.addChild(playBtn)
         
@@ -59,7 +62,8 @@ class MenuScene: SKScene {
         self.addChild(playLabel)
         
         //share button
-        let shareBtn = MenuButton(defaultTextureName: "Btn_Share.png", pressedTextureName: "Btn_Share_Down.png", touchMethod: shareButtonPressed)
+        let shareBtn = MenuButton(defaultTextureName: "Btn_Share.png",
+                                  pressedTextureName: "Btn_Share_Down.png", touchMethod: shareButtonPressed)
         shareBtn.position = CGPoint(x: 497, y: 216)
         self.addChild(shareBtn)
         
@@ -96,15 +100,15 @@ class MenuScene: SKScene {
         
         self.addChild(swipeView)
         
-        
-        var gms: GameScore
-        gms = gameState.currentScore
-        
-        swipeView.addView(contentNode: createPreviousScoreCard(fromGameScore: gms))
-        swipeView.addView(contentNode: createPreviousScoreCard(fromGameScore: gms))
-        swipeView.addView(contentNode: createPreviousScoreCard(fromGameScore: gms))
-        swipeView.addView(contentNode: createPreviousScoreCard(fromGameScore: gms))
-        swipeView.addView(contentNode: createPreviousScoreCard(fromGameScore: gms))
+        var counter = 0
+        for gameScore in self.previousGamesModel.getPreviousGames() {
+            swipeView.addView(contentNode: createPreviousScoreCard(
+                                            score: gameScore.score,
+                                            image: gameScore.image!))
+            
+            counter += 1
+        }
+
         
         // back button to return to game if necessary
         if gameState.isPaused {
@@ -127,11 +131,16 @@ class MenuScene: SKScene {
             self.addChild(backLabel)
             
         }
+        
+        // create the previous scores model
+        
+        // load the previous scores and score images
+        
     }
     
     // called by game scene when new image of gameboard has been created
     func gameBoardImageCreated(image: UIImage) {
-        
+        previousGamesModel.addNewScore(score: 100, image: image)
     }
     
     
@@ -159,12 +168,14 @@ class MenuScene: SKScene {
     
     // create card for previous score
     // returns usable SKNode for swipe view
-    func createPreviousScoreCard(fromGameScore: GameScore) -> SKNode {
+    func createPreviousScoreCard(score: Int, image: UIImage) -> SKNode {
         let parentNode = SKNode()
         
         //screenshot
-        let playSS = SKSpriteNode(imageNamed: "Play_Screenshot.png")
+        
+        let playSS = SKSpriteNode(texture: SKTexture(image: image))
         playSS.anchorPoint = CGPoint(x: 0.5, y: 0)
+        playSS.size = CGSize(width: 543, height: 566)
         playSS.position = CGPoint(x: self.size.width / 2.0,
                                   y: 0)
         
@@ -179,7 +190,7 @@ class MenuScene: SKScene {
         pausedLabel.verticalAlignmentMode = .baseline
         pausedLabel.horizontalAlignmentMode = .center
         pausedLabel.position = CGPoint(x: self.size.width / 2.0,
-                                       y: 580)
+                                       y: 616)
         
         if self.gameState.isPaused {            // only add paused label for a paused game
             parentNode.addChild(pausedLabel)
@@ -192,12 +203,12 @@ class MenuScene: SKScene {
                                             green: 100.0 / 255.0,
                                             blue: 107.0 / 255.0,
                                             alpha: 1.0)
-        scoreLabel.text = String(fromGameScore.score)
+        scoreLabel.text = String(score)
         
         scoreLabel.verticalAlignmentMode = .baseline
         scoreLabel.horizontalAlignmentMode = .center
         scoreLabel.position = CGPoint(x: self.size.width / 2.0,
-                                       y: 641)
+                                       y: 674)
         
         parentNode.addChild(scoreLabel)
         

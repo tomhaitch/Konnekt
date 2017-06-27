@@ -13,6 +13,7 @@
 // hold score, peice layout
 
 import Foundation
+import UIKit
 
 // enum of score amounts per piece matches
 enum PieceMatchValue: Int {
@@ -28,6 +29,7 @@ enum PieceMatchValue: Int {
 class GameScore{
     
     var score: Int
+    var image: UIImage? = nil                                      // image of the game
     var scoreDelegate: GameScoreDidChange? = nil          // the object to inform of score changes
     
     

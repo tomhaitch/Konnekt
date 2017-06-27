@@ -14,6 +14,8 @@ class GameViewController: UIViewController {
     
     let skView = SKView()
     let scene = MenuScene()
+    let gameScene = GameScene()
+    var sceneToUse: SKScene!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,14 +23,24 @@ class GameViewController: UIViewController {
         skView.frame = view.frame
         view.addSubview(skView)
         
+        // check if this is the first game ever played
+        let firstGameComplete = UserDefaults.standard.bool(forKey: "Konnekt_First_Game_Completed")
+        
+        if firstGameComplete {
+            sceneToUse = scene
+        }
+        else {
+            sceneToUse = gameScene
+        }
+        
         // Set scene size to iphone 6/7 size
-        scene.size = CGSize(width: 750, height: 1334)
+        sceneToUse.size = CGSize(width: 750, height: 1334)
         
         // Set the scale mode to scale to fit the window
-        scene.scaleMode = .aspectFill
+        sceneToUse.scaleMode = .aspectFill
         
         // Present the scene
-        skView.presentScene(scene)
+        skView.presentScene(sceneToUse)
         
         skView.ignoresSiblingOrder = false
         
