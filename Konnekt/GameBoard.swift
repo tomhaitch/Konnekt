@@ -80,7 +80,7 @@ class GameBoard: SKNode{
         // calculate the position of every available board slot
         for y in 1 ... 5 {
             for x in 1 ... 5 {
-                var position = self.calculatePrecisePiecePosition(           // use coord method to create
+                var position = calculatePrecisePiecePosition(           // use coord method to create
                                         fromBoardCoordinates:               // position array
                                             CGPoint(x: x, y: y))
                 
@@ -136,54 +136,7 @@ class GameBoard: SKNode{
     }
     
     
-    // calculate the board coordinates of the piece from grid position
-    private func calculatePieceBoardCoordinates(fromGridPosition: Int) -> CGPoint{
         
-        // calculate grid coordinates using division with remainders
-        //  grid position / 5 = y coord
-        //  grid position modulo 5 = x coord (the remainder)
-        let yPos = Int(fromGridPosition / 5)
-        let xPos = fromGridPosition % 5
-        
-        // coordinate space starts 1x1, make coords correct and create CGPoint
-        let coord = CGPoint(x: xPos + 1,
-                            y: yPos + 1)
-        
-        return coord
-    }
-    
-    // calculate the grid array position from a coord
-    private func calculatePieceGridPosition(fromCoordinates: CGPoint) -> Int {
-        
-        if fromCoordinates.x < 1 || fromCoordinates.x > 5 ||
-            fromCoordinates.y < 1 || fromCoordinates.y > 5 {
-            return -1
-        }
-        
-        return Int(((fromCoordinates.y - 1) * 5) + (fromCoordinates.x - 1))
-    }
-    
-    // calculate the precise position for a piece using its board
-    // coordinates
-    private func calculatePrecisePiecePosition(fromBoardCoordinates: CGPoint) -> CGPoint {
-        
-        // use leading spaces and gaps to calculate x pos
-        // lots of casting to CGFloats to enable calculation
-        let xPos = CGFloat(self.boardSlotHorizontalLeading) +
-                        (fromBoardCoordinates.x * CGFloat(self.boardSlotsHorizontalGap)) +
-                        CGFloat(self.slotSize.width / 2) +
-                        ((fromBoardCoordinates.x - 1) * CGFloat(self.slotSize.width))
-        
-        // use leading spaces and gaps to calculate y pos
-        let yPos = CGFloat(self.boardSlotVerticalLeading) +
-                        (fromBoardCoordinates.y * CGFloat(self.boardSlotsVerticalGap)) +
-                        CGFloat(self.slotSize.height / 2) +
-                        ((fromBoardCoordinates.y - 1) * CGFloat(self.slotSize.height))
-        
-        return CGPoint(x: xPos, y: yPos)
-        
-    }
-    
     // checks if a board slot is empty of filled
     private func isSlotEmpty(slotIndex: Int) -> Bool {
         if self.gamePieces[slotIndex].pieceType == .Empty {
@@ -202,8 +155,8 @@ class GameBoard: SKNode{
         pieceToAdd.boardGridPosition = atSlot
         
         // get the coords and then position of the slot to fill
-        let coord = self.calculatePieceBoardCoordinates(fromGridPosition: atSlot)
-        let position = self.calculatePrecisePiecePosition(fromBoardCoordinates: coord)
+        let coord = calculatePieceBoardCoordinates(fromGridPosition: atSlot)
+        let position = calculatePrecisePiecePosition(fromBoardCoordinates: coord)
         
         // set position
         pieceToAdd.position = position
@@ -236,7 +189,7 @@ class GameBoard: SKNode{
                                                                 // add placedpiece initally
         
         if placedPiece.boardCoordinates.x != 1 {        // check the piece to the left
-            let gridPos = self.calculatePieceGridPosition(
+            let gridPos = calculatePieceGridPosition(
                                         fromCoordinates: placedPiece.boardCoordinates.left())
             
             // check for match
@@ -256,7 +209,7 @@ class GameBoard: SKNode{
         }
         
         if placedPiece.boardCoordinates.y != 5 {        // check the piece above
-            let gridPos = self.calculatePieceGridPosition(
+            let gridPos = calculatePieceGridPosition(
                                         fromCoordinates: placedPiece.boardCoordinates.above())
             
             // check for match
@@ -277,7 +230,7 @@ class GameBoard: SKNode{
         }
         
         if placedPiece.boardCoordinates.x != 5 {        // check to piece to the right
-            let gridPos = self.calculatePieceGridPosition(
+            let gridPos = calculatePieceGridPosition(
                                         fromCoordinates: placedPiece.boardCoordinates.right())
             
             // check for match
@@ -297,7 +250,7 @@ class GameBoard: SKNode{
         }
 
         if placedPiece.boardCoordinates.y != 1 {        // check the piece below
-            let gridPos = self.calculatePieceGridPosition(
+            let gridPos = calculatePieceGridPosition(
                                         fromCoordinates: placedPiece.boardCoordinates.below())
             
             // check for match
@@ -349,7 +302,7 @@ class GameBoard: SKNode{
         let spawnPoint = self.calculateCentralCoordinate(fromCoordinates: coordinates)
         
         // get the grid position from the coordinate
-        let gridPoint = self.calculatePieceGridPosition(fromCoordinates: spawnPoint)
+        let gridPoint = calculatePieceGridPosition(fromCoordinates: spawnPoint)
         
         // create the next piece up at the central coordinate
         let newPiece = OnBoardGamePiece(pieceType: PieceType(
@@ -440,19 +393,19 @@ class GameBoard: SKNode{
                     // check the pieces around this one to find an empty slot
                     // calculate the grid pos and then add to array
                     let leftCoord = piece.boardCoordinates.left()
-                    posArray.append(self.calculatePieceGridPosition(
+                    posArray.append(calculatePieceGridPosition(
                                                     fromCoordinates: leftCoord))
                     
                     let aboveCoord = piece.boardCoordinates.above()
-                    posArray.append(self.calculatePieceGridPosition(
+                    posArray.append(calculatePieceGridPosition(
                         fromCoordinates: aboveCoord))
                     
                     let rightCoord = piece.boardCoordinates.right()
-                    posArray.append(self.calculatePieceGridPosition(
+                    posArray.append(calculatePieceGridPosition(
                         fromCoordinates: rightCoord))
                     
                     let belowCoord = piece.boardCoordinates.below()
-                    posArray.append(self.calculatePieceGridPosition(
+                    posArray.append(calculatePieceGridPosition(
                         fromCoordinates: belowCoord))
                     
                     

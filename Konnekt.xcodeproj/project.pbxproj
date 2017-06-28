@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E2056AFC1EE9D13E00103075 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2056AFB1EE9D13E00103075 /* GameState.swift */; };
+		E20A07D61F03CCB10028380C /* GameBoardHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20A07D51F03CCB10028380C /* GameBoardHelper.swift */; };
+		E20A07D81F03CDC50028380C /* GameBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E20A07D71F03CDC50028380C /* GameBoardView.swift */; };
 		E21E58401EF6ED5D00E7FA68 /* OnBoardGamePiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21E583F1EF6ED5D00E7FA68 /* OnBoardGamePiece.swift */; };
 		E23F47101F02988C00854E16 /* PreviousGamesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F470F1F02988C00854E16 /* PreviousGamesModel.swift */; };
 		E23F5E551EEB301B00DFC7BC /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23F5E541EEB301B00DFC7BC /* MenuButton.swift */; };
@@ -52,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		E2056AFB1EE9D13E00103075 /* GameState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
+		E20A07D51F03CCB10028380C /* GameBoardHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardHelper.swift; sourceTree = "<group>"; };
+		E20A07D71F03CDC50028380C /* GameBoardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameBoardView.swift; sourceTree = "<group>"; };
 		E21E583F1EF6ED5D00E7FA68 /* OnBoardGamePiece.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardGamePiece.swift; sourceTree = "<group>"; };
 		E23F470F1F02988C00854E16 /* PreviousGamesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousGamesModel.swift; sourceTree = "<group>"; };
 		E23F5E541EEB301B00DFC7BC /* MenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 				E290C9611EFD92F600CDEA88 /* GameScene.swift */,
 				E2D67A881EE897F0005B58D0 /* MenuScene.swift */,
 				E28F1C1A1EF0596E0046DB2C /* GameBoard.swift */,
+				E20A07D71F03CDC50028380C /* GameBoardView.swift */,
+				E20A07D51F03CCB10028380C /* GameBoardHelper.swift */,
 				E28F1C1C1EF060770046DB2C /* GamePiece.swift */,
 				E21E583F1EF6ED5D00E7FA68 /* OnBoardGamePiece.swift */,
 				E28F1C1E1EF065460046DB2C /* PlayablePiece.swift */,
@@ -253,7 +259,9 @@
 				E2056AFC1EE9D13E00103075 /* GameState.swift in Sources */,
 				E23F5E551EEB301B00DFC7BC /* MenuButton.swift in Sources */,
 				E2D67A8B1EE897F0005B58D0 /* GameViewController.swift in Sources */,
+				E20A07D81F03CDC50028380C /* GameBoardView.swift in Sources */,
 				E2D67A831EE897F0005B58D0 /* AppDelegate.swift in Sources */,
+				E20A07D61F03CCB10028380C /* GameBoardHelper.swift in Sources */,
 				E28F1C231EF06E210046DB2C /* CGPoint+Extensions.swift in Sources */,
 				E28F1C1F1EF065460046DB2C /* PlayablePiece.swift in Sources */,
 				E28F1C1D1EF060770046DB2C /* GamePiece.swift in Sources */,
